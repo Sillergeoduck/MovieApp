@@ -28,22 +28,6 @@
 </head>
 
 <body>
-<div>
-    <!--<table>-->
-        <!--<tr>-->
-            <!--<th>row</th>-->
-            <!--<th>original_title</th>-->
-            <!--<th>title</th>-->
-            <!--<th>img</th>-->
-        <!--</tr>-->
-        <!--<tr ng-repeat="movie in movieList " >-->
-            <!--<td>{{ $index + 1 }}</td>   &lt;!&ndash; $index is set to the item index or key. &ndash;&gt;-->
-            <!--<td>{{ movie.original_title }}</td>-->
-            <!--<td>{{ movie.title }}</td>-->
-            <!--<td><img src="https://image.tmdb.org/t/p/w370/{{movie.backdrop_path}}" alt=""></td>-->
-        <!--</tr>-->
-    <!--</table>-->
-</div>
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -79,7 +63,17 @@
 </nav>
 <div class="container">
     <div class="row">
-        <div class=" search col-sm-3 col-md-3 pull-right">
+        <div  class=" search col-sm-6 col-md-6 pull-left">
+        <!-- Indicates a successful or positive action -->
+
+        <button ng-click="nowPlaying()" type="button" class="btn btn-success">Now Playing</button>
+        <!-- Indicates a successful or positive action -->
+            <a href="#/upcoming">upcoming</a>
+        <button ng-click="upcoming()" type="button" class="btn btn-success">Upcoming</button>
+        <!-- Indicates a successful or positive action -->
+        <button ng-click="popular()" type="button" class="btn btn-success">Popular</button>
+        </div>
+        <div class=" search col-sm-6 col-md-6 pull-right">
             <!-- <form class="navbar-form" role="search">-->
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search" name="q">
@@ -91,6 +85,8 @@
         </div>
     </div>
 </div>
+
+<div ng-view> </div>
 
 <div class="container">
 
@@ -113,14 +109,10 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src ="Movie/js/bootstrap.min.js"></script>
-<!--<script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular.min.js"></script>-->
-<!--<script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular-route.min.js"></script>-->
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
-<script src = "router.js"></script>
 <script src = "javascripts/MovieController.js"></script>
-
-<div ng-view>
+<script src = "javascripts/router.js"></script>
 
 </div>
 
