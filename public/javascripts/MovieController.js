@@ -2,7 +2,6 @@
  * Created by Rajeev on 12/16/15.
  */
 var myApp = angular.module("movieApp", ['ngRoute']);
-
 myApp.controller("MovieController",function($scope, $http){
 
     $http.get("http://api.themoviedb.org/3/movie/now_playing?api_key=fb5875eace5a99021e9a7dc4728b1a6b")
@@ -11,6 +10,38 @@ myApp.controller("MovieController",function($scope, $http){
             console.log(response.results);
         });
     //$scope.movies = data.results;
+
+    $scope.nowPlaying = function(){
+        $http.get("http://api.themoviedb.org/3/movie/now_playing?api_key=fb5875eace5a99021e9a7dc4728b1a6b")
+            .success(function(response) {
+                $scope.movieList = response.results;
+                console.log(response.results);
+                console.log("now_playing");
+            });
+        //$scope.movies = data.results;
+    }
+
+    $scope.upcoming = function(){
+        $http.get("http://api.themoviedb.org/3/movie/upcoming?api_key=fb5875eace5a99021e9a7dc4728b1a6b")
+            .success(function(response) {
+                $scope.movieList = response.results;
+                console.log(response.results);
+                console.log("upcoming");
+            });
+        //$scope.movies = data.results;
+    }
+
+    $scope.popular = function(){
+        $http.get("http://api.themoviedb.org/3/movie/popular?api_key=fb5875eace5a99021e9a7dc4728b1a6b")
+            .success(function(response) {
+                $scope.movieList = response.results;
+                console.log(response.results);
+                console.log("popular");
+
+
+            });
+        //$scope.movies = data.results;
+    }
 
 
 });
