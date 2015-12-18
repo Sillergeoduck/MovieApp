@@ -1,3 +1,4 @@
+<div ng-include="'header.ejs'"></div>
 <!-- Page Content -->
 <div class="container">
 
@@ -37,7 +38,7 @@
 
             <div class="row">
 
-                <div class="col-sm-4 col-lg-2 col-md-3" ng-repeat="movie in movieList">
+                <div class="col-sm-4 col-lg-3 col-md-3" ng-repeat="movie in movieList">
                     <div class="thumbnail">
                         <img src="https://image.tmdb.org/t/p/w370/{{movie.poster_path}}" alt="{{movie.title}}">
                         <div class="ratings">
@@ -55,8 +56,26 @@
 
             </div>
 
+
         </div>
 
+    </div>
+    <div class="container">
+    <div class="row">
+        <div ng-click="previousPage()" class="col-lg-2 pull-left">
+            <span ng-hide="pageCount <=1" style="font-size:7vh;cursor: pointer; "
+                  class="glyphicon glyphicon-hand-left btn-lg" aria-hidden="true"></span>
+        </div>
+        <div class="col-lg-8 ">
+
+                        {{pageCount}}/{{totalPage}}
+
+        </div>
+        <div ng-click="nextPage()" class=" col-lg-2 pull-right">
+            <span ng-hide="pageCount>=totalPage" style="font-size:7vh;cursor: pointer; "
+                  class="glyphicon glyphicon-hand-right btn-lg" aria-hidden="true"></span>
+        </div>
+    </div>
     </div>
 
 </div>
