@@ -24,7 +24,7 @@ myApp.controller("MovieController",function($scope, $http, $location,$route){
         }
         type= 'search';
 
-        $http.get("http://api.themoviedb.org/3/search/movie?api_key="+api_key+"&page="+ $scope.pageCount+"&query="+ document.getElementById('searchTxt').value)
+        $http.get("//api.themoviedb.org/3/search/movie?api_key="+api_key+"&page="+ $scope.pageCount+"&query="+ document.getElementById('searchTxt').value)
             .success(function(response) {
                 $scope.movieList = response.results;
                 $scope.totalPage = response.total_pages;
@@ -32,7 +32,7 @@ myApp.controller("MovieController",function($scope, $http, $location,$route){
     };
 
     var movieList = function(movieFilter){
-        $http.get("http://api.themoviedb.org/3/movie/"+movieFilter+"?api_key="+api_key+"&page="+ $scope.pageCount)
+        $http.get("//api.themoviedb.org/3/movie/"+movieFilter+"?api_key="+api_key+"&page="+ $scope.pageCount)
             .success(function(response) {
                 $scope.movieList = response.results;
                 $scope.totalPage = response.total_pages;
