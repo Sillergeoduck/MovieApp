@@ -27,15 +27,19 @@ myApp.controller("MovieController",function($scope, $http, $location,$route){
         $http.get("//api.themoviedb.org/3/search/movie?api_key="+api_key+"&page="+ $scope.pageCount+"&query="+ document.getElementById('searchTxt').value)
             .success(function(response) {
                 $scope.movieList = response.results;
-                $scope.totalPage = response.total_pages;
+                $scope.totalPage = 0 || response.total_pages;
             });
     };
 
+    $scope.searchByEnter = function(keyEvent) {
+        if (keyEvent.which === 13)
+            $scope.search();
+    };
     var movieList = function(movieFilter){
         $http.get("//api.themoviedb.org/3/movie/"+movieFilter+"?api_key="+api_key+"&page="+ $scope.pageCount)
             .success(function(response) {
                 $scope.movieList = response.results;
-                $scope.totalPage = response.total_pages;
+                $scope.totalPage = 0 || response.total_pages;
 
             });
     };
