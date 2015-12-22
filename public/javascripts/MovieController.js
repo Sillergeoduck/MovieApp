@@ -2,7 +2,7 @@
  * Created by Rajeev on 12/16/15.
  */
 var myApp = angular.module("movieApp", ['ngRoute']);
-myApp.controller("MovieController",function($scope, $http, $location,$route){
+myApp.controller("MovieController",function($scope, $rootScope, $http, $location,$route){
 
     $scope.pageCount = 1;
     $scope.totalPage = 0;
@@ -16,6 +16,15 @@ myApp.controller("MovieController",function($scope, $http, $location,$route){
     $scope.reloadPage= function(){
         $route.reload();
     };
+
+    $scope.showDetail= function(event){
+
+        console.log(event.target.getAttribute('data-id'));
+        $rootScope.movieList = $scope.movieList;
+        $rootScope.movieId = event.target.getAttribute('data-id');
+        $location.path('/movie/movieDetails');
+
+    }
 
     $scope.search = function(){
         if (!srch ){

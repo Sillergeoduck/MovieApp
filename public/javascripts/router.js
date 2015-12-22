@@ -15,6 +15,9 @@ myApp.config(['$routeProvider', function ($routeProvider) {
     }).when('/movie/popular', {
         templateUrl: '/MovieList.ejs',
         controller: 'MovieController'
+    }).when('/movie/movieDetails', {
+        templateUrl: '/movieDetails.ejs',
+        controller: 'movieDetailController'
     }).otherwise({
         redirectTo: 'ANTMAN'
     })
