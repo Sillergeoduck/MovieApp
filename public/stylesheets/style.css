@@ -9,6 +9,10 @@ a {
 .search{
   margin-bottom: 18px;
   /*margin-top: -10px;*/
-
-
+}
+.next{
+  font-size:7vh;cursor: pointer; padding-right: 0;
+}
+.previous{
+  font-size:7vh;cursor: pointer; padding-left: 0;
 }
