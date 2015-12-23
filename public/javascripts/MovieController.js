@@ -17,6 +17,10 @@ myApp.controller("MovieController",function($scope, $rootScope, $http, $location
         $route.reload();
     };
 
+    $scope.signIn = function(){
+        console.log('Hi Welcome to 21st Century cinemas');
+    }
+
     $scope.showDetail= function(event){
 
         console.log(event.target.getAttribute('data-id'));

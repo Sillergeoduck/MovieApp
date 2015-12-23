@@ -20,10 +20,10 @@ myApp.config(['$routeProvider', function ($routeProvider) {
         controller: 'movieDetailController'
     }).when('/movie/sign-up', {
             templateUrl: '/Signup.ejs',
-            controller: 'movieDetailController'
+            controller: 'movieController'
     }).when('/movie/sign-in', {
             templateUrl: '/login.ejs',
-            controller: 'movieDetailController'
+            controller: 'movieController'
     }).otherwise({
         redirectTo: 'ANTMAN'
     })
