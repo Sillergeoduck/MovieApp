@@ -5,14 +5,27 @@
 
     <!-- Portfolio Item Row -->
     <div class="row">
-
-        <div class="col-md-8">
-            <img ng-show="{{movi1e.poster_path!==null}}" src="https://image.tmdb.org/t/p/w370/{{movie.poster_path}}" alt="{{movie.title}}" data-id="{{movie.id}}" ng-click="">
+        <div class="col-xs-12 col-md-4 thumbnail">
+            <img id="poster" ng-show="{{movi1e.poster_path!==null}}" src="https://image.tmdb.org/t/p/w370/{{movie.poster_path}}" alt="{{movie.title}}" data-id="{{movie.id}}" ng-click="">
             <img ng-show="{{movie.poster_path===null}}" src="https://image.tmdb.org/t/p/w370/{{movie.backdrop_path}}" alt="{{movie.title}}"  data-id="{{movie.id}}" ng-click="">
         </div>
+        <div class="col-md-4" style="overflow: auto; height:62vh">
+            <h3 class="margin-top-0">Cast</h3>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-repeat="cast in movieCast">
 
+                    <img ng-show="{{cast.profile_path !== null}}" src="https://image.tmdb.org/t/p/w370/{{cast.profile_path}}" alt="{{cast.name}}" style="width:10vw; margin: 0 10px 10px 0; float:left">
+                    <img ng-show="{{cast.profile_path === null}}" src="images/Person_NoPhotoAvailable.png" alt="{{cast.name}}" style="width:10vw; margin: 0 10px 10px 0; float:left">
+                    <div class="text-center">
+                        <span><strong>{{cast.name}}</strong></span><br>
+                        <span><small>{{cast.character}}</small></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <div class="col-md-4">
-            <h3>{{movie.title}}</h3>
+            <h3 class="margin-top-0">{{movie.title}}</h3>
             <p>{{movie.overview}}</p>
             <h3>Movie Details</h3>
             <ul>
@@ -21,7 +34,6 @@
                 <li>Popularity: {{movie.popularity}}</li>
             </ul>
         </div>
-
     </div>
     <!-- /.row -->
 
@@ -29,33 +41,29 @@
     <div class="row">
 
         <div class="col-lg-12">
-            <h3 class="page-header">Related Projects</h3>
+            <h3 class="page-header">Other Movies</h3>
         </div>
 
-        <div class="col-sm-3 col-xs-6">
-            <a href="#">
-                <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-            </a>
+        <div class="col-sm-3 col-xs-6" ng-repeat="movie in otherMovies">
+                <img class="img-responsive portfolio-item" src="https://image.tmdb.org/t/p/w370/{{movie.poster_path}}" alt="{{movie.title}}" style="width:100%; height: 250px; display: block;" data-id="{{movie.id}}" ng-click="showDetail($event)">
         </div>
-
-        <div class="col-sm-3 col-xs-6">
-            <a href="#">
-                <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-            </a>
+    </div>
+    <button ng-click="open()">open</button>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Add a review ...</h3>
+    </div>
+    <div class="modal-body"  style="color: darkred;">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">@</span>
+            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
         </div>
-
-        <div class="col-sm-3 col-xs-6">
-            <a href="#">
-                <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-            </a>
-        </div>
-
-        <div class="col-sm-3 col-xs-6">
-            <a href="#">
-                <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
-            </a>
-        </div>
+        <textarea class="form-control" rows="5" placeholder="Review " style="resize: none;"></textarea>
 
     </div>
-
-</div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()"> Save </button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()"> Cancel </button>
+    </div>
+</script>

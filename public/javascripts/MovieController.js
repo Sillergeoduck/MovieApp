@@ -1,7 +1,7 @@
 /**
  * Created by Rajeev on 12/16/15.
  */
-var myApp = angular.module("movieApp", ['ngRoute']);
+var myApp = angular.module("movieApp", ['ngRoute','ngAnimate', 'ui.bootstrap']);
 myApp.controller("MovieController",function($scope, $rootScope, $http, $location,$route){
 
     $scope.pageCount = 1;
@@ -28,7 +28,7 @@ myApp.controller("MovieController",function($scope, $rootScope, $http, $location
         $rootScope.movieId = event.target.getAttribute('data-id');
         $location.path('/movie/movieDetails');
 
-    }
+    };
 
     $scope.search = function(){
         if (!srch ){

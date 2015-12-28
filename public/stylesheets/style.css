@@ -16,3 +16,6 @@ a {
 .previous{
   font-size:7vh;cursor: pointer; padding-left: 0;
 }
+.margin-top-0{
+  margin-top: 0;
+}
