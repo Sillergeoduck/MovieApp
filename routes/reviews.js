@@ -29,7 +29,7 @@ router.get('/review', function (req, res) {
 });
 
 router.get('/review/:movieId', function (req, res) {
-    Review.findOne({movieId:req.params.movieId },function(err, reviews) {
+    Review.find({movieId:req.params.movieId },function(err, reviews) {
         if (err)
             res.send(err);
 
@@ -52,7 +52,7 @@ router.post('/review', function (req, res) {
         username: req.body.username,
         review: req.body.review,
         movieId: Number(req.body.movieId),
-        registerDate: req.body.date
+        register: req.body.register
     })).save(function (err,data) {
             console.log(err);
             console.log(data);

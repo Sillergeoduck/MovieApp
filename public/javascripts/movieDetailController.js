@@ -9,6 +9,10 @@ myApp.controller("movieDetailController",function($scope, $rootScope, $http, $lo
             $scope.movieCast = response.credits.cast;
         });
 
+    $http.get("/reviews/review/"+$rootScope.movieId)
+        .success(function(response) {
+            $rootScope.reviewsList = response;
+        });
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -39,7 +43,7 @@ myApp.controller("movieDetailController",function($scope, $rootScope, $http, $lo
             size: size,
             resolve: {
                 items: function () {
-                    return $scope.items;
+                    return $scope.movieId;
                 }
             }
         });
