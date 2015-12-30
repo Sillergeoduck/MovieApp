@@ -13,6 +13,30 @@ myApp.controller("movieDetailController",function($scope, $rootScope, $http, $lo
         .success(function(response) {
             $rootScope.reviewsList = response;
         });
+    var img = document.getElementById('poster');
+
+    img.addEventListener('load', function() {
+        console.log('My width is: ', this.offsetWidth);
+        console.log('My height is: ', this.offsetHeight);
+        setSize(this.offsetHeight);
+
+    });
+
+    window.addEventListener('resize', function () {
+        console.log('My width is: ', img.offsetWidth);
+        console.log('My height is: ', img.offsetHeight);
+        setSize(img.offsetHeight);
+    });
+
+    function setSize( heigth){
+        var castDiv = document.getElementById('cast');
+        var imgCast = document.getElementsByName('imgcast');
+        castDiv.style.maxHeight = heigth+'px';
+        for (var i=0; i<imgCast.length; i++){
+            imgCast[i].style.width = heigth/8+"px"
+        }
+
+    }
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }

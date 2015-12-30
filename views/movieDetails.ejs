@@ -5,17 +5,17 @@
 
     <!-- Portfolio Item Row -->
     <div class="row">
-        <div class="col-xs-12 col-md-4 thumbnail">
-            <img id="poster" ng-show="{{movi1e.poster_path!==null}}" src="https://image.tmdb.org/t/p/w370/{{movie.poster_path}}" alt="{{movie.title}}" data-id="{{movie.id}}" ng-click="">
+        <div class="col-xs-12 col-md-4 thumbnail" >
+            <img id="poster"  ng-show="{{movi1e.poster_path!==null}}" src="https://image.tmdb.org/t/p/w370/{{movie.poster_path}}" alt="{{movie.title}}" data-id="{{movie.id}}" ng-click="">
             <img ng-show="{{movie.poster_path===null}}" src="https://image.tmdb.org/t/p/w370/{{movie.backdrop_path}}" alt="{{movie.title}}"  data-id="{{movie.id}}" ng-click="">
         </div>
-        <div class="col-md-4" style="overflow: auto; height:62vh">
+        <div class="col-md-4" style="overflow: auto;margin-bottom: 10px" id="cast">
             <h3 class="margin-top-0">Cast</h3>
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-repeat="cast in movieCast">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat="cast in movieCast">
 
-                    <img ng-show="{{cast.profile_path !== null}}" src="https://image.tmdb.org/t/p/w370/{{cast.profile_path}}" alt="{{cast.name}}" style="width:10vw; margin: 0 10px 10px 0; float:left">
-                    <img ng-show="{{cast.profile_path === null}}" src="images/Person_NoPhotoAvailable.png" alt="{{cast.name}}" style="width:10vw; margin: 0 10px 10px 0; float:left">
+                    <img name="imgcast" ng-show="{{cast.profile_path !== null}}" src="https://image.tmdb.org/t/p/w370/{{cast.profile_path}}" alt="{{cast.name}}" style="width:3vw; margin: 0 10px 10px 0; float:left">
+                    <img name="imgcast" ng-show="{{cast.profile_path === null}}" src="images/Person_NoPhotoAvailable.png" alt="{{cast.name}}" style="width:3vw; margin: 0 10px 10px 0; float:left">
                     <div class="text-center">
                         <span><strong>{{cast.name}}</strong></span><br>
                         <span><small>{{cast.character}}</small></span>
@@ -32,21 +32,33 @@
                 <li>Release Date: {{movie.release_date}}</li>
                 <li>Language: {{movie.original_language}}</li>
                 <li>Popularity: {{movie.popularity}}</li>
+                <li>budget: {{movie.budget | number}}</li>
+                <li>revenue: {{movie.revenue | number}}</li>
+                <li>status: {{movie.status}}</li>
+                <li>status: {{movie.status}}</li>
+
+
             </ul>
         </div>
     </div>
     <!-- /.row -->
     <div class="row">
+        <div class="col-lg-12">
+
         <h3 class="page-header">Reviews
             <button ng-click="open()" class="btn btn-default pull-right">Add Review</button>
         </h3>
-        <div class="panel panel-default" ng-repeat="data in reviewsList" style="background-color:#f5f5f5 ">
-            <p style="margin: 10px 0 0 10px; font-style: italic;">
-            <span> {{data.username}} </span>
-            <span> {{data.register}} </span>
-            </p>
-            <div class="panel-body" data-reviewId="{{data._id}}">
-                {{data.review}}
+        </div>
+        <div class="col-lg-12">
+            <p ng-show="reviewsList.length===0">Be the first one to add a review!</p>
+            <div class="panel panel-default" ng-repeat="data in reviewsList  | orderBy:'-register'" style="background-color:#f5f5f5 ">
+                <p style="margin: 10px 0 0 10px; font-style: italic;">
+                    <span> {{data.username}} </span>
+                    <span> {{data.register}} </span>
+                </p>
+                <div class="panel-body" data-reviewId="{{data._id}}">
+                    {{data.review}}
+                </div>
             </div>
         </div>
     </div>
