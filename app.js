@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var reviews = require('./routes/reviews');
 
+
 var app = express();
 
 // view engine setup
@@ -25,9 +26,40 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(express.static(path.join(__dirname, 'views')));
 
+
+
+//===========================
+var authenticate = require('./public/javascripts/authenticate');
+var User = require('./public/javascripts/models/user');
+var mongoose= require('mongoose');
+var config = require('./public/javascripts/config');
+mongoose.createConnection(config.database); // connect to database
+app.get('/setup', function(req, res) {
+
+  // create a sample user
+  var user = new User({
+    name: 'mary',
+    password: '123456',
+    admin: true
+  });
+  user.save(function(err) {
+    if (err) throw err;
+
+    console.log('User saved successfully');
+    res.json({ success: true });
+  });
+});
+
+
+
+//===========================
+
+
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/reviews', reviews);
+app.use('/api', authenticate);
 
 
 // catch 404 and forward to error handler

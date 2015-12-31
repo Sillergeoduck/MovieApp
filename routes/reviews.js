@@ -1,22 +1,16 @@
 var express = require('express');
 var router = express.Router();
-
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/movieDB', function (err, db) {
+var Review = require('../public/javascripts/models/review');
+var config = require('../public/javascripts/config');
+mongoose.connect(config.database, function (err, db) {
     if (err){
         console.log('error...');
+        console.log(err);
     }
     else
         console.log('database is connected and movieDB has been created...!')
 });
-
-var Review = mongoose.model('Review', {
-    username: 'string',
-    review: 'string',
-    movieId: 'number',
-    register: 'string'
-});
-
 
 router.get('/review', function (req, res) {
     //res.render('review');
@@ -24,7 +18,7 @@ router.get('/review', function (req, res) {
         if (err)
             res.send(err);
 
-        res.json(200, reviews);
+        res.status(200).json(reviews)
     });
 });
 
@@ -33,7 +27,7 @@ router.get('/review/:movieId', function (req, res) {
         if (err)
             res.send(err);
 
-        res.json(200, reviews);
+        res.status(200).json(reviews)
     });
 });
 
@@ -41,7 +35,7 @@ router.get('/reviewId/:id', function (req, res) {
     Review.findById(req.params.id, function(err, review) {
         if (err)
             res.send(err);
-        res.json(200,review);
+        res.status(200).json(review)
     });
 });
 
@@ -54,8 +48,6 @@ router.post('/review', function (req, res) {
         movieId: Number(req.body.movieId),
         register: req.body.register
     })).save(function (err,data) {
-            console.log(err);
-            console.log(data);
             if (err) {
                 res.json(500, { message: 'Could not connect to the database.'});
             } else {
