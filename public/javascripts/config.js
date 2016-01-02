@@ -4,5 +4,6 @@
 module.exports = {
 
     'secret': 'ilovejavascript',
-    'database': 'mongodb://localhost/movieDB'
+    //'database': 'mongodb://localhost/movieDB'
+    'database': 'mongodb://admin:spanishguitar@ds037175.mongolab.com:37175/moviedb'
 };
