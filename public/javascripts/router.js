@@ -19,7 +19,7 @@ myApp.config(['$routeProvider', function ($routeProvider) {
         templateUrl: '/movieDetails.ejs',
         controller: 'movieDetailController'
     }).when('/movie/sign-up', {
-        templateUrl: '/signup.ejs',
+        templateUrl: '/register.ejs',
         controller: 'userController'
     }).when('/movie/sign-in', {
         templateUrl: '/signin.ejs',
