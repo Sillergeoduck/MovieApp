@@ -49,7 +49,10 @@ myApp.controller("userController", function ($scope, $rootScope, $http, $crypto,
                                         token: data.token,
                                         username: data.username
                                     };
-                                    $location.path('/movie/nowplaying');
+                                    if ($rootScope.movieId != null && $rootScope.movieId !==undefined)
+                                        $location.path('/movie/movieDetails');
+                                    else
+                                        $location.path('/movie/nowplaying');
                                 }).error(function (err) {
                                 console.log('error => ' + err);
                             });

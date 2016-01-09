@@ -28,6 +28,6 @@ myApp.config(['$routeProvider', function ($routeProvider) {
         templateUrl: '/signout.ejs',
         controller: 'signoutController'
     }).otherwise({
-        redirectTo: '/movieList'
+        redirectTo: '/nowplaying'
     })
 }]);

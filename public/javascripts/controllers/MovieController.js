@@ -7,7 +7,10 @@ myApp.controller("MovieController",function($scope, $rootScope, $http, $location
     $scope.pageCount = 1;
     $scope.totalPage = 0;
     $scope.currentPage= null;
-
+    $rootScope.user = {
+        token: null,
+        username: null
+    };
     var baseurl = $location.absUrl().split('/');
     $scope.currentPage = $scope.baseUrl = baseurl[baseurl.length - 1];
     var srch = false;
@@ -35,7 +38,7 @@ myApp.controller("MovieController",function($scope, $rootScope, $http, $location
             srch = true;
             $scope.pageCount = 1;
         }
-        type= 'search';
+        type = 'search';
 
         $http.get("//api.themoviedb.org/3/search/movie?api_key="+api_key+"&page="+ $scope.pageCount+"&query="+ document.getElementById('searchTxt').value)
             .success(function(response) {

@@ -3,3 +3,6 @@ AngularJS Form Validation:
 
 Middleout Angular Cryptography
     https://github.com/middleout/angular-cryptography
+
+Authenticate a Node.js API with JSON Web Tokens
+    https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens

@@ -1,5 +1,6 @@
 var express = require('express');
-var router = express.Router();
+//var router = express.Router();
+var router = require('./authenticate');
 var mongoose = require('mongoose');
 var Review = require('../public/javascripts/models/review');
 var config = require('../public/javascripts/config');
@@ -12,34 +13,6 @@ mongoose.connect(config.database, function (err, db) {
         console.log('database is connected and movieDB has been created...!')
 });
 
-router.get('/review', function (req, res) {
-    //res.render('review');
-    Review.find(function(err, reviews) {
-        if (err)
-            res.send(err);
-
-        res.status(200).json(reviews)
-    });
-});
-
-router.get('/review/:movieId', function (req, res) {
-    Review.find({movieId:req.params.movieId },function(err, reviews) {
-        if (err)
-            res.send(err);
-
-        res.status(200).json(reviews)
-    });
-});
-
-router.get('/reviewId/:id', function (req, res) {
-    Review.findById(req.params.id, function(err, review) {
-        if (err)
-            res.send(err);
-        res.status(200).json(review)
-    });
-});
-
-/*
 router.post('/review', function (req, res) {
     console.log(req.body);
 
@@ -87,6 +60,5 @@ router.delete('/reviewId/:id', function (req, res) {
 
     });
 });
-*/
 
 module.exports = router;

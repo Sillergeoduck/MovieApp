@@ -35,9 +35,6 @@
                 <li>budget: {{movie.budget | number}}</li>
                 <li>revenue: {{movie.revenue | number}}</li>
                 <li>status: {{movie.status}}</li>
-                <li>status: {{movie.status}}</li>
-
-
             </ul>
         </div>
     </div>
@@ -46,7 +43,7 @@
         <div class="col-lg-12">
 
         <h3 class="page-header">Reviews
-            <button ng-click="open()" class="btn btn-default pull-right">Add Review</button>
+            <button ng-click="addReview()" class="btn btn-default pull-right">Add Review</button>
         </h3>
         </div>
         <div class="col-lg-12">
@@ -63,7 +60,7 @@
         </div>
     </div>
     <!-- Related Projects Row -->
-    <div class="row">
+    <div class="row" ng-show="otherMovies">
 
         <div class="col-lg-12">
             <h3 class="page-header">Other Movies</h3>

@@ -1,6 +1,7 @@
 myApp.controller("movieDetailController",function($scope, $rootScope, $http, $location,$route,$uibModal,$window){
 
     $scope.otherMovies = [];
+    $scope.otherMovies =true;
     //console.log($rootScope.movieList);
     //console.log($rootScope.movieId);
     $http.get("//api.themoviedb.org/3/movie/"+$rootScope.movieId+"?api_key="+api_key+"&append_to_response=credits")
@@ -45,12 +46,16 @@ myApp.controller("movieDetailController",function($scope, $rootScope, $http, $lo
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    var indexes = [];
-    while($scope.otherMovies.length<4){
-        var idx= getRandomInt(0, 19);
-        if ($rootScope.movieList[idx].poster_path !== null && indexes.indexOf(idx)==-1 && $rootScope.movieList[idx].id != $rootScope.movieId){
-            $scope.otherMovies.push($rootScope.movieList[idx]);
-            indexes.push(idx);
+    var indexes = []
+    if ($rootScope.movieList.length <4)
+        $scope.otherMovies =false;
+    else {
+        while ($scope.otherMovies.length < 4) {
+            var idx = getRandomInt(0, $rootScope.movieList.length-1);
+            if ($rootScope.movieList[idx].poster_path !== null && indexes.indexOf(idx) == -1 && $rootScope.movieList[idx].id != $rootScope.movieId) {
+                $scope.otherMovies.push($rootScope.movieList[idx]);
+                indexes.push(idx);
+            }
         }
     }
 
@@ -58,7 +63,13 @@ myApp.controller("movieDetailController",function($scope, $rootScope, $http, $lo
         $rootScope.movieId = event.target.getAttribute('data-id');
         $route.reload();
     };
+    $scope.addReview = function(){
 
+        if ($rootScope.user.token != undefined && $rootScope.user.token != null)
+            $scope.open();
+        else
+            $location.path('/movie/sign-in');
+    };
 
     $scope.items = [];
 

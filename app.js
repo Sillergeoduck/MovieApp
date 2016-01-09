@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var reviews = require('./routes/reviews');
+var reviewsTrans = require('./routes/reviewsTrans');
 var authenticate = require('./routes/authenticate');
 
 var app = express();
@@ -28,39 +29,11 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 app.use(express.static(path.join(__dirname, 'views')));
 
 
-
-//===========================
-/*var authenticate = require('./routes/authenticate');
-var User = require('./public/javascripts/models/user');
-var mongoose= require('mongoose');
-var config = require('./public/javascripts/config');
-mongoose.createConnection(config.database); // connect to database
-app.get('/setup', function(req, res) {
-
-  // create a sample user
-  var user = new User({
-    name: 'mary',
-    password: '123456',
-    admin: true
-  });
-  user.save(function(err) {
-    if (err) throw err;
-
-    console.log('User saved successfully');
-    res.json({ success: true });
-  });
-});*/
-
-
-
-//===========================
-
-
-
 app.use('/', routes);
 app.use('/users', users);
-app.use('/reviews', reviews);
 app.use('/api', authenticate);
+app.use('/reviews', reviews);
+app.use('/reviews', reviewsTrans);
 
 
 // catch 404 and forward to error handler
