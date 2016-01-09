@@ -1,7 +1,7 @@
 /**
  * Created by Hamid on 1/6/2016.
  */
-myApp.controller("userController", function ($scope, $rootScope, $http, $crypto, $location, showAlertSrvc) {
+myApp.controller("userController", function ($scope, $rootScope, $http, $crypto, $location, showAlertSrvc, AppConstant) {
         $scope.register = {
             email: '',
             name: '',
@@ -11,8 +11,7 @@ myApp.controller("userController", function ($scope, $rootScope, $http, $crypto,
             email: '',
             password: ''
         };
-        $scope.message = showAlertSrvc(1, false, '');
-        //$scope.message = null;
+        $scope.message = showAlertSrvc(1, false, '', AppConstant.messageType.danger);
         $scope.userRegister = function (isValid) {
             console.log('form is submitted.');
             $scope.required = true;
@@ -26,10 +25,11 @@ myApp.controller("userController", function ($scope, $rootScope, $http, $crypto,
                 };
                 $http.post("/users/register", $scope.register)
                     .success(function (result) {
-                        console.log('registration was successful')
+                        $scope.message = showAlertSrvc(4000, false,'Registration was successful! ',AppConstant.messageType.success);
+
                     }).error(function (err) {
                         console.log('error => ' + err);
-                        $scope.message = showAlertSrvc(4000, false,'There is an issue on registration. Try again! ');
+                        $scope.message = showAlertSrvc(4000, false,'There is an issue on registration. Try again! ',AppConstant.messageType.danger);
 
                 });
             }
@@ -55,10 +55,10 @@ myApp.controller("userController", function ($scope, $rootScope, $http, $crypto,
                             });
 
                         } else {
-                            $scope.message = showAlertSrvc(4000, false,'Username or Password is wrong. Try again! ');
+                            $scope.message = showAlertSrvc(4000, false,'Username or Password is wrong. Try again! ', AppConstant.messageType.danger);
                         }
                     } else {
-                        $scope.message = showAlertSrvc(4000, false,result.message);
+                        $scope.message = showAlertSrvc(4000, false,result.message, AppConstant.messageType.danger);
                     }
                 }).error(function (err) {
                 console.log('error => ' + err);

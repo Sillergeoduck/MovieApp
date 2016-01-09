@@ -1,5 +1,7 @@
 <div ng-include src="'header.ejs'"></div>
-
+<div class="alert" ng-class="message.type" role="alert" ng-show="!message.hidden">
+    {{message.alertMessage}}
+</div>
 <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info">
@@ -20,7 +22,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="reg-username" type="text" class="form-control" name="username" required
-                               ng-model="register.username"
+                               ng-model="register.name"
                                placeholder="name">
                     </div>
                     <span style="color:red" ng-show="userForm.username.$dirty && userForm.username.$invalid">

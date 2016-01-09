@@ -1,5 +1,5 @@
 <div ng-include src="'header.ejs'"></div>
-<div class="alert alert-danger" role="alert" ng-show="!message.hidden">
+<div class="alert" ng-class="message.type" role="alert" ng-show="!message.hidden">
     {{message.alertMessage}}
 </div>
 <div class="container">

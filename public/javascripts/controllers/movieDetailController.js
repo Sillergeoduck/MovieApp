@@ -60,7 +60,7 @@ myApp.controller("movieDetailController",function($scope, $rootScope, $http, $lo
     };
 
 
-    $scope.items = ['item1', 'item2', 'item3'];
+    $scope.items = [];
 
     $scope.animationsEnabled = true;
 
