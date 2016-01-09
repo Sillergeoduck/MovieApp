@@ -19,11 +19,11 @@ myApp.config(['$routeProvider', function ($routeProvider) {
         templateUrl: '/movieDetails.ejs',
         controller: 'movieDetailController'
     }).when('/movie/sign-up', {
-            templateUrl: '/signup.ejs',
-            controller: 'userController'
+        templateUrl: '/signup.ejs',
+        controller: 'userController'
     }).when('/movie/sign-in', {
-            templateUrl: '/signin.ejs',
-            controller: 'userController'
+        templateUrl: '/signin.ejs',
+        controller: 'userController'
     }).when('/movie/sign-out', {
         templateUrl: '/signout.ejs',
         controller: 'signoutController'
