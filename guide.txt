@@ -1,0 +1,5 @@
+AngularJS Form Validation:
+    https://scotch.io/tutorials/angularjs-form-validation
+
+Middleout Angular Cryptography
+    https://github.com/middleout/angular-cryptography

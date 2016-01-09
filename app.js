@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var reviews = require('./routes/reviews');
-
+var authenticate = require('./routes/authenticate');
 
 var app = express();
 
@@ -24,12 +24,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
+app.use(express.static(path.join(__dirname, 'bower_components')));
 app.use(express.static(path.join(__dirname, 'views')));
 
 
 
 //===========================
-var authenticate = require('./public/javascripts/authenticate');
+/*var authenticate = require('./routes/authenticate');
 var User = require('./public/javascripts/models/user');
 var mongoose= require('mongoose');
 var config = require('./public/javascripts/config');
@@ -48,7 +49,7 @@ app.get('/setup', function(req, res) {
     console.log('User saved successfully');
     res.json({ success: true });
   });
-});
+});*/
 
 
 

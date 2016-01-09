@@ -4,14 +4,13 @@
 var express 	= require('express');
 var mongoose    = require('mongoose');
 var apiRoutes = express.Router();
-
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var config = require('./config'); // get our config file
-var User = require('./models/user');
+var config = require('./../public/javascripts/config'); // get our config file
+var User = require('./../public/javascripts/models/user');
 mongoose.createConnection(config.database); // connect to database
 var app         = express();
 app.set('superSecret', config.secret); // secret variable
-
+var userSign = {};
 // ---------------------------------------------------------
 // authentication (no middleware necessary since this isnt authenticated)
 // ---------------------------------------------------------
@@ -20,7 +19,7 @@ apiRoutes.post('/authenticate', function(req, res) {
 
     // find the user
     User.findOne({
-        name: req.body.name
+        email: req.body.email
     }, function(err, user) {
 
         if (err) throw err;
@@ -30,7 +29,7 @@ apiRoutes.post('/authenticate', function(req, res) {
         } else if (user) {
 
             // check if password matches
-            if (user.password != req.body.password) {
+           /* if (user.password != req.body.password) {
                 res.json({ success: false, message: 'Authentication failed. Wrong password.' });
             } else {
 
@@ -45,10 +44,28 @@ apiRoutes.post('/authenticate', function(req, res) {
                     message: 'Enjoy your token!',
                     token: token
                 });
-            }
-
+            }*/
+            userSign = user;
+            res.json({
+                success: true,
+                password: user.password
+            });
         }
 
+    });
+});
+
+apiRoutes.post('/authenticate/token', function(req, res) {
+    var token = jwt.sign(userSign, app.get('superSecret'), {
+       // expiresInMinutes: 1440 // expires in 24 hours
+        expiresIn: 1440 // expires in 24 hours
+    });
+
+    res.json({
+        success: true,
+        message: 'Enjoy your token!',
+        token: token,
+        username : userSign.name
     });
 });
 

@@ -6,8 +6,14 @@
         </div>
         <div class=" search col-sm-6 col-md-4 pull-right text-right">
             <div  style="margin-bottom: 15px">
-                <span><a ng-click ="signIn()" href="#/movie/sign-in">Sign in</a></span> /
-                <span><a href="">Sign up</a></span>
+                <span ng-show="user.token === null || user.token === undefined">
+                    <span><a href="#/movie/sign-in">Sign in</a></span> /
+                    <span><a href="#/movie/sign-up">Sign up</a></span>
+                </span>
+                <span ng-show="user.token != null || user.token != undefined">
+                    <span>Hi {{user.username}}</span> /
+                    <span><a href="#/movie/sign-out">Sign out</a></span>
+                </span>
             </div>
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search" name="q" id = "searchTxt" ng-keypress = "searchByEnter($event)">

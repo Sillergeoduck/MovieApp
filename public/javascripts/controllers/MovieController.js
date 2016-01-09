@@ -1,7 +1,7 @@
 /**
  * Created by Rajeev on 12/16/15.
  */
-var myApp = angular.module("movieApp", ['ngRoute','ngAnimate', 'ui.bootstrap']);
+var myApp = angular.module("movieApp", ['ngRoute','ngAnimate', 'ui.bootstrap', 'mdo-angular-cryptography']);
 myApp.controller("MovieController",function($scope, $rootScope, $http, $location,$route){
 
     $scope.pageCount = 1;
@@ -19,7 +19,7 @@ myApp.controller("MovieController",function($scope, $rootScope, $http, $location
 
     $scope.signIn = function(){
         console.log('Hi Welcome to 21st Century cinemas');
-    }
+    };
 
     $scope.showDetail= function(event){
 
@@ -91,5 +91,6 @@ myApp.controller("MovieController",function($scope, $rootScope, $http, $location
     }
 
 });
+
 
 

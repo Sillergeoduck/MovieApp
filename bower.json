@@ -1,0 +1,24 @@
+{
+  "name": "MovieApp",
+  "description": "sample application using angularJS",
+  "main": "www",
+  "authors": [
+    "Hamid Hoseini <hamid_hoseini@aol.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Sillergeoduck/MovieApp",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "aes": "~0.0.1",
+    "angular-cryptography": "~1.0.1"
+  }
+}

@@ -1,4 +1,4 @@
-myApp.controller("movieDetailController",function($scope, $rootScope, $http, $location,$route,$uibModal){
+myApp.controller("movieDetailController",function($scope, $rootScope, $http, $location,$route,$uibModal,$window){
 
     $scope.otherMovies = [];
     //console.log($rootScope.movieList);
@@ -13,11 +13,14 @@ myApp.controller("movieDetailController",function($scope, $rootScope, $http, $lo
         .success(function(response) {
             $rootScope.reviewsList = response;
         });
+
     var img = document.getElementById('poster');
+    //setSize(img.offsetHeight);
+
 
     img.addEventListener('load', function() {
-        console.log('My width is: ', this.offsetWidth);
-        console.log('My height is: ', this.offsetHeight);
+        console.log('My width is from load: ', this.offsetWidth);
+        console.log('My height is from load: ', this.offsetHeight);
         setSize(this.offsetHeight);
 
     });
@@ -28,12 +31,14 @@ myApp.controller("movieDetailController",function($scope, $rootScope, $http, $lo
         setSize(img.offsetHeight);
     });
 
-    function setSize( heigth){
+    function setSize( newHeigth){
+        console.log('set size ====>'+ newHeigth);
         var castDiv = document.getElementById('cast');
         var imgCast = document.getElementsByName('imgcast');
-        castDiv.style.maxHeight = heigth+'px';
+        castDiv.style.maxHeight = newHeigth+'px';
+        console.log("max heigth ==>"+castDiv.style.maxHeight);
         for (var i=0; i<imgCast.length; i++){
-            imgCast[i].style.width = heigth/8+"px"
+            imgCast[i].style.width = newHeigth/8+"px";
         }
 
     }
@@ -53,6 +58,7 @@ myApp.controller("movieDetailController",function($scope, $rootScope, $http, $lo
         $rootScope.movieId = event.target.getAttribute('data-id');
         $route.reload();
     };
+
 
     $scope.items = ['item1', 'item2', 'item3'];
 
