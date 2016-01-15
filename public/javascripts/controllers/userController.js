@@ -11,6 +11,15 @@ myApp.controller("userController", function ($scope, $rootScope, $http, $crypto,
             email: '',
             password: ''
         };
+        $scope.search = function() {
+            $rootScope.typeAction  = 'search';
+            $rootScope.searchTxt = document.getElementById('searchTxt').value;
+            $location.path('/movie/nowplaying');
+        };
+        $scope.searchByEnter = function(keyEvent) {
+            if (keyEvent.which === 13)
+                $scope.search();
+        };
         $scope.message = showAlertSrvc(1, false, '', AppConstant.messageType.danger);
         $scope.userRegister = function (isValid) {
             console.log('form is submitted.');
@@ -30,7 +39,6 @@ myApp.controller("userController", function ($scope, $rootScope, $http, $crypto,
                     }).error(function (err) {
                         console.log('error => ' + err);
                         $scope.message = showAlertSrvc(4000, false,'There is an issue on registration. Try again! ',AppConstant.messageType.danger);
-
                 });
             }
         };

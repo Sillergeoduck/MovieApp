@@ -47,7 +47,7 @@
         </h3>
         </div>
         <div class="col-lg-12">
-            <p ng-show="reviewsList.length===0">Be the first one to add a review!</p>
+            <p ng-show="reviewsList.length === 0">Be the first one to add a review!</p>
             <div class="panel panel-default" ng-repeat="data in reviewsList  | orderBy:'-register'" style="background-color:#f5f5f5 ">
                 <p style="margin: 10px 0 0 10px; font-style: italic;">
                     <span> {{data.username}} </span>
@@ -60,7 +60,7 @@
         </div>
     </div>
     <!-- Related Projects Row -->
-    <div class="row" ng-show="otherMovies">
+    <div class="row" ng-show="otherMoviesValid">
 
         <div class="col-lg-12">
             <h3 class="page-header">Other Movies</h3>

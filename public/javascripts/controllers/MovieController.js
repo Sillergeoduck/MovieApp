@@ -2,7 +2,7 @@
  * Created by Rajeev on 12/16/15.
  */
 var myApp = angular.module("movieApp", ['ngRoute','ngAnimate', 'ui.bootstrap', 'mdo-angular-cryptography']);
-myApp.controller("MovieController",function($scope, $rootScope, $http, $location,$route){
+myApp.controller("MovieController",function($scope, $rootScope, $http, $location,$route, movieService){
 
     $scope.pageCount = 1;
     $scope.totalPage = 0;
@@ -14,7 +14,7 @@ myApp.controller("MovieController",function($scope, $rootScope, $http, $location
     var baseurl = $location.absUrl().split('/');
     $scope.currentPage = $scope.baseUrl = baseurl[baseurl.length - 1];
     var srch = false;
-    var type = null;
+    //$rootScope.typeAction = null;
 
     $scope.reloadPage= function(){
         $route.reload();
@@ -25,12 +25,10 @@ myApp.controller("MovieController",function($scope, $rootScope, $http, $location
     };
 
     $scope.showDetail= function(event){
-
-        console.log(event.target.getAttribute('data-id'));
         $rootScope.movieList = $scope.movieList;
         $rootScope.movieId = event.target.getAttribute('data-id');
+        $rootScope.searchTxt = null;
         $location.path('/movie/movieDetails');
-
     };
 
     $scope.search = function(){
@@ -38,25 +36,30 @@ myApp.controller("MovieController",function($scope, $rootScope, $http, $location
             srch = true;
             $scope.pageCount = 1;
         }
-        type = 'search';
-
-        $http.get("//api.themoviedb.org/3/search/movie?api_key="+api_key+"&page="+ $scope.pageCount+"&query="+ document.getElementById('searchTxt').value)
-            .success(function(response) {
-                $scope.movieList = response.results;
-                $scope.totalPage = 0 || response.total_pages;
-            });
+        $rootScope.typeAction  = 'search';
+        $rootScope.searchTxt = document.getElementById('searchTxt').value;
+        movieService.search($rootScope.searchTxt, $scope.pageCount).then(function (data) {
+            $scope.movieList = data.results;
+            $scope.totalPage = 0 || data.total_pages;
+        }, function (error) {
+            console.log(error);
+            //$scope.message = showAlertSrvc(4000, false,'Username or Password is wrong. Try again! ', AppConstant.messageType.warning);
+        });
     };
 
     $scope.searchByEnter = function(keyEvent) {
         if (keyEvent.which === 13)
             $scope.search();
+        else
+            srch = false;
     };
+
     var movieList = function(movieFilter){
         $http.get("//api.themoviedb.org/3/movie/"+movieFilter+"?api_key="+api_key+"&page="+ $scope.pageCount)
             .success(function(response) {
                 $scope.movieList = response.results;
                 $scope.totalPage = 0 || response.total_pages;
-
+                srch = false;
             });
     };
     $scope.nextPage = function(){
@@ -75,7 +78,7 @@ myApp.controller("MovieController",function($scope, $rootScope, $http, $location
 
     invokeMovieList();
     function invokeMovieList() {
-        if (type=='search')
+        if ( $rootScope.typeAction == 'search')
             $scope.currentPage = 'search';
         switch ($scope.currentPage) {
             case "upcoming":
