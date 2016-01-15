@@ -1,25 +1,34 @@
-myApp.controller("movieDetailController",function($scope, $rootScope, $http, $location,$route,$uibModal,$window){
+myApp.controller("movieDetailController", function ($scope, $rootScope, $http, $location, $route, $uibModal, $window) {
 
     $scope.otherMovies = [];
-    $scope.otherMovies =true;
+    $scope.otherMoviesValid = true;
     //console.log($rootScope.movieList);
     //console.log($rootScope.movieId);
-    $http.get("//api.themoviedb.org/3/movie/"+$rootScope.movieId+"?api_key="+api_key+"&append_to_response=credits")
-        .success(function(response) {
+    $scope.search = function() {
+        $rootScope.typeAction  = 'search';
+        $rootScope.searchTxt = document.getElementById('searchTxt').value;
+        $location.path('/movie/nowplaying');
+    };
+    $scope.searchByEnter = function(keyEvent) {
+        if (keyEvent.which === 13)
+            $scope.search();
+    };
+
+    $http.get("//api.themoviedb.org/3/movie/" + $rootScope.movieId + "?api_key=" + api_key + "&append_to_response=credits")
+        .success(function (response) {
             $scope.movie = response;
             $scope.movieCast = response.credits.cast;
         });
 
-    $http.get("/reviews/review/"+$rootScope.movieId)
-        .success(function(response) {
+    $http.get("/reviews/review/" + $rootScope.movieId)
+        .success(function (response) {
             $rootScope.reviewsList = response;
         });
 
     var img = document.getElementById('poster');
     //setSize(img.offsetHeight);
 
-
-    img.addEventListener('load', function() {
+    img.addEventListener('load', function () {
         console.log('My width is from load: ', this.offsetWidth);
         console.log('My height is from load: ', this.offsetHeight);
         setSize(this.offsetHeight);
@@ -32,26 +41,28 @@ myApp.controller("movieDetailController",function($scope, $rootScope, $http, $lo
         setSize(img.offsetHeight);
     });
 
-    function setSize( newHeigth){
-        console.log('set size ====>'+ newHeigth);
+    function setSize(newHeigth) {
+        console.log('set size ====>' + newHeigth);
         var castDiv = document.getElementById('cast');
         var imgCast = document.getElementsByName('imgcast');
-        castDiv.style.maxHeight = newHeigth+'px';
-        console.log("max heigth ==>"+castDiv.style.maxHeight);
-        for (var i=0; i<imgCast.length; i++){
-            imgCast[i].style.width = newHeigth/8+"px";
+        castDiv.style.maxHeight = newHeigth + 'px';
+        console.log("max heigth ==>" + castDiv.style.maxHeight);
+        for (var i = 0; i < imgCast.length; i++) {
+            imgCast[i].style.width = newHeigth / 8 + "px";
         }
 
     }
+
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    var indexes = []
-    if ($rootScope.movieList.length <4)
-        $scope.otherMovies =false;
+
+    var indexes = [];
+    if ($rootScope.movieList.length < 4)
+        $scope.otherMoviesValid = false;
     else {
         while ($scope.otherMovies.length < 4) {
-            var idx = getRandomInt(0, $rootScope.movieList.length-1);
+            var idx = getRandomInt(0, $rootScope.movieList.length - 1);
             if ($rootScope.movieList[idx].poster_path !== null && indexes.indexOf(idx) == -1 && $rootScope.movieList[idx].id != $rootScope.movieId) {
                 $scope.otherMovies.push($rootScope.movieList[idx]);
                 indexes.push(idx);
@@ -59,11 +70,11 @@ myApp.controller("movieDetailController",function($scope, $rootScope, $http, $lo
         }
     }
 
-    $scope.showDetail= function(event){
+    $scope.showDetail = function (event) {
         $rootScope.movieId = event.target.getAttribute('data-id');
         $route.reload();
     };
-    $scope.addReview = function(){
+    $scope.addReview = function () {
 
         if ($rootScope.user.token != undefined && $rootScope.user.token != null)
             $scope.open();
